@@ -26,7 +26,7 @@ ATTENTION_GUIDANCE_PATTERN = {
 TRAINING_ARGS = TrainingArguments(
     per_device_train_batch_size=32,
     output_dir=CHECKPOINT_DIR,
-    num_train_epochs=4,
+    num_train_epochs=2,
     save_strategy='epoch'
 )
 
@@ -36,7 +36,7 @@ model = GPT2LMHeadModel.from_pretrained(PRETRAINED_MODEL_NAME)
 
 raw_dataset = load_dataset(
     path=DATASET_NAME,
-    split='train[:100]',  # use train[:int_value] to load a subset of the dataset, mainly for testing purposes
+    split='train[:1000000]',  # use train[:int_value] to load a subset of the dataset, mainly for testing purposes
     download_config=DownloadConfig(cache_dir="./dataset/gpt2")
 )
 
