@@ -3,6 +3,7 @@ import os
 from datasets import load_dataset, DownloadConfig
 from transformers import TrainingArguments, DataCollatorForLanguageModeling, GPT2LMHeadModel, GPT2Tokenizer
 from transformers.trainer_utils import get_last_checkpoint
+from utils.tokens_utils import ORDER_TOKENS, CONTRAST_TOKENS, ADDITION_TOKENS, EMPHASIS_TOKENS
 
 from attention_guidance_trainer import AttentionGuidanceTrainer, StdoutCallback
 from utils.dataset_utils import group_texts
@@ -13,11 +14,13 @@ FINETUNED_SAVE_DIR = "./models"
 FINETUNED_MODEL_NAME = "gpt2-ag"
 DATASET_NAME = 'Skylion007/openwebtext'
 
-CONTRAST_TOKENS = [' not', ' Not', ' but', ' But', ' though', ' Though', 'though', 'not']
 
 # Keys are the attention head number, values are the tokens that are guided
 ATTENTION_GUIDANCE_PATTERN = {
     0: CONTRAST_TOKENS,
+    1: ORDER_TOKENS,
+    2: ADDITION_TOKENS,
+    4: EMPHASIS_TOKENS,
 }
 
 TRAINING_ARGS = TrainingArguments(
@@ -33,7 +36,7 @@ model = GPT2LMHeadModel.from_pretrained(PRETRAINED_MODEL_NAME)
 
 raw_dataset = load_dataset(
     path=DATASET_NAME,
-    split='train[:100000]',  # use train[:int_value] to load a subset of the dataset, mainly for testing purposes
+    split='train[:100]',  # use train[:int_value] to load a subset of the dataset, mainly for testing purposes
     download_config=DownloadConfig(cache_dir="./dataset/gpt2")
 )
 
