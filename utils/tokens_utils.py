@@ -14,7 +14,6 @@ ORDER_TOKENS = [
     'Sub',
     ' sub',
     'sequently',
-    ' sequently',
     'Before',
     ' before',
     'Fore',
