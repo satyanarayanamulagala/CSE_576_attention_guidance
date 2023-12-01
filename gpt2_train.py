@@ -8,12 +8,17 @@ from utils.tokens_utils import ORDER_TOKENS, CONTRAST_TOKENS, ADDITION_TOKENS, E
 from attention_guidance_trainer import AttentionGuidanceTrainer, StdoutCallback
 from utils.dataset_utils import group_texts
 
-PRETRAINED_MODEL_NAME = "gpt2"
-CHECKPOINT_DIR = "./checkpoints"
-FINETUNED_SAVE_DIR = "./models"
-FINETUNED_MODEL_NAME = "gpt2-ag"
-DATASET_NAME = 'Skylion007/openwebtext'
+# PRETRAINED_MODEL_NAME = "gpt2"
+# CHECKPOINT_DIR = "./checkpoints"
+# FINETUNED_SAVE_DIR = "./models"
+# FINETUNED_MODEL_NAME = "gpt2-ag"
+# DATASET_NAME = 'Skylion007/openwebtext'
 
+PRETRAINED_MODEL_NAME = "gpt2-medium"
+CHECKPOINT_DIR = "./gpt2_medium_checkpoints"
+FINETUNED_SAVE_DIR = "./models"
+FINETUNED_MODEL_NAME = "gpt2-medium-ag"
+DATASET_NAME = 'Skylion007/openwebtext'
 
 # Keys are the attention head number, values are the tokens that are guided
 ATTENTION_GUIDANCE_PATTERN = {
@@ -24,9 +29,9 @@ ATTENTION_GUIDANCE_PATTERN = {
 }
 
 TRAINING_ARGS = TrainingArguments(
-    per_device_train_batch_size=32,
+    per_device_train_batch_size=16,
     output_dir=CHECKPOINT_DIR,
-    num_train_epochs=2,
+    num_train_epochs=1,
     save_strategy='epoch'
 )
 
